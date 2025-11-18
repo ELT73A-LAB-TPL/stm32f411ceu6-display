@@ -1,0 +1,53 @@
+load STM32F411CEUx
+set pin "PC13-ANTI_TAMP" GPIO_Output
+set pin "PC14-OSC32_IN" RCC_OSC32_IN
+lock pin "PC14-OSC32_IN" false
+set pin "PC15-OSC32_OUT" RCC_OSC32_OUT
+lock pin "PC15-OSC32_OUT" false
+set pin "PH0 - OSC_IN" RCC_OSC_IN
+lock pin "PH0 - OSC_IN" false
+set pin "PH1 - OSC_OUT" RCC_OSC_OUT
+lock pin "PH1 - OSC_OUT" false
+set pin "PA0-WKUP" GPIO_Input
+set pin "PA13" SYS_JTMS-SWDIO
+lock pin "PA13" false
+set pin "PA14" SYS_JTCK-SWCLK
+lock pin "PA14" false
+set pin "PB6" I2C1_SCL
+lock pin "PB6" false
+set pin "PB7" I2C1_SDA
+lock pin "PB7" false
+set mode I2C1 "I2C"
+set mode RCC "HSE-External-Oscillator"
+set mode RCC "LSE-External-Oscillator"
+set mode SYS "Serial_Wire"
+set mode SYS "SysTick"
+set ip parameters I2C1 "I2C_Mode" "I2C_Fast"
+NVIC set_prioritygroup 4
+NVIC enable "MemoryManagement_IRQn"
+NVIC set_priority "MemoryManagement_IRQn" 0
+NVIC set_subpriority "MemoryManagement_IRQn" 0
+NVIC enable "BusFault_IRQn"
+NVIC set_priority "BusFault_IRQn" 0
+NVIC set_subpriority "BusFault_IRQn" 0
+NVIC enable "UsageFault_IRQn"
+NVIC set_priority "UsageFault_IRQn" 0
+NVIC set_subpriority "UsageFault_IRQn" 0
+NVIC enable "SVCall_IRQn"
+NVIC set_priority "SVCall_IRQn" 0
+NVIC set_subpriority "SVCall_IRQn" 0
+NVIC enable "DebugMonitor_IRQn"
+NVIC set_priority "DebugMonitor_IRQn" 0
+NVIC set_subpriority "DebugMonitor_IRQn" 0
+NVIC enable "PendSV_IRQn"
+NVIC set_priority "PendSV_IRQn" 0
+NVIC set_subpriority "PendSV_IRQn" 0
+NVIC enable "SysTick_IRQn"
+NVIC set_priority "SysTick_IRQn" 15
+NVIC set_subpriority "SysTick_IRQn" 0
+set gpio parameters "PC13-ANTI_TAMP" "PinState" "GPIO_PIN_SET"
+set gpio parameters "PC13-ANTI_TAMP" "GPIO_PuPd" "GPIO_NOPULL"
+set gpio parameters "PC13-ANTI_TAMP" "GPIO_Label" "Blue LED"
+set gpio parameters "PC13-ANTI_TAMP" "GPIO_ModeDefaultOutputPP" "GPIO_MODE_OUTPUT_OD"
+set gpio parameters "PA0-WKUP" "GPIO_PuPd" "GPIO_PULLUP"
+set gpio parameters "PA0-WKUP" "GPIO_Label" "User Key"
